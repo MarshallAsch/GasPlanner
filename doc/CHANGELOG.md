@@ -1,3 +1,35 @@
+# 1.0.0 (2026-09-30)
+
+
+### Bug Fixes
+
+* [#20](https://github.com/MarshallAsch/GasPlanner/issues/20) tabs overlap with menu at 780px viewport width ([99a10d7](https://github.com/MarshallAsch/GasPlanner/commit/99a10d7bcce5b18ca428e7f303278b4c1fa930e6))
+* [#23](https://github.com/MarshallAsch/GasPlanner/issues/23) heatmap chart doesn't expand to full width on first load ([34686cf](https://github.com/MarshallAsch/GasPlanner/commit/34686cfe64eaed8626f3e9afecf4f0e98ceb370d))
+* [#30](https://github.com/MarshallAsch/GasPlanner/issues/30) localize surface interval placeholder text ([1be7b6e](https://github.com/MarshallAsch/GasPlanner/commit/1be7b6e6a75d01fdfb87567aac0b45f865a79dc7))
+* [#30](https://github.com/MarshallAsch/GasPlanner/issues/30) register the service worker so all languages work offline ([112fed6](https://github.com/MarshallAsch/GasPlanner/commit/112fed6640452d641dbfed28ee750363bdfe1d6b))
+* [#30](https://github.com/MarshallAsch/GasPlanner/issues/30) show colored country flags in language dropdown ([232afac](https://github.com/MarshallAsch/GasPlanner/commit/232afac0552f82ba15ad0333386455970549a288))
+* [#30](https://github.com/MarshallAsch/GasPlanner/issues/30) unsubscribe QuizService from onLangChange on destroy ([3bc41c1](https://github.com/MarshallAsch/GasPlanner/commit/3bc41c1bf039c8c640bafa019b807da2ba695961))
+* [#30](https://github.com/MarshallAsch/GasPlanner/issues/30) update current quiz question text on language switch ([21fa560](https://github.com/MarshallAsch/GasPlanner/commit/21fa560419de42d94a411246bc6e3276058180d8))
+* fixed build pipeline resolved previous version ([2f5d6d5](https://github.com/MarshallAsch/GasPlanner/commit/2f5d6d5721c31aa3160d1c61ca83dfed9c43554d))
+* Fixed deployment of pwa inconsistent version numbers ([46524a5](https://github.com/MarshallAsch/GasPlanner/commit/46524a58d552b7b0d9e0db5165974db934b90e10))
+* Show highest ceiling only in case it is not 0 m ([d565fa7](https://github.com/MarshallAsch/GasPlanner/commit/d565fa7012e711a8c95eb9848f00489281f393c2))
+* weight calculator wrong usage of consumed amount ([66b2932](https://github.com/MarshallAsch/GasPlanner/commit/66b2932e59180bcf4ea134bfe945e9c8d42fa694))
+
+
+### Features
+
+* [#25](https://github.com/MarshallAsch/GasPlanner/issues/25) consumed gas in liters per gas ([97afb8e](https://github.com/MarshallAsch/GasPlanner/commit/97afb8e52066fb4b84454448de9db7c1980a29f8))
+* [#30](https://github.com/MarshallAsch/GasPlanner/issues/30) add runtime localization with language switcher ([a9954df](https://github.com/MarshallAsch/GasPlanner/commit/a9954df70c0f1c9e8f638948985644422c9bf709))
+* [#30](https://github.com/MarshallAsch/GasPlanner/issues/30) localize all component templates for all languages ([d1a2bda](https://github.com/MarshallAsch/GasPlanner/commit/d1a2bda9c6d89ef9cbb0edba324df1626051642d))
+* [#30](https://github.com/MarshallAsch/GasPlanner/issues/30) localize Plotly dive-profile charts ([cb2fe2e](https://github.com/MarshallAsch/GasPlanner/commit/cb2fe2e38c7dbbd19046216f77bd1d3069135ecd))
+* [#30](https://github.com/MarshallAsch/GasPlanner/issues/30) localize the learn page and quiz questions ([76e62f3](https://github.com/MarshallAsch/GasPlanner/commit/76e62f34ff32990b9a5f67461992aceb7a666760))
+* [#30](https://github.com/MarshallAsch/GasPlanner/issues/30) make number pipes locale-aware ([a352318](https://github.com/MarshallAsch/GasPlanner/commit/a352318339a414d17afe2328923163560710fda7))
+* [#45](https://github.com/MarshallAsch/GasPlanner/issues/45) round runtime at end of stops to minutes ([f2d415a](https://github.com/MarshallAsch/GasPlanner/commit/f2d415a48f137f6a2e59f09fb7757d2df0bf7fe1))
+* [#90](https://github.com/MarshallAsch/GasPlanner/issues/90) CNS residual between dives and 24 hour limit ([2229fc1](https://github.com/MarshallAsch/GasPlanner/commit/2229fc1e8b588aefccb737b8adfff8d8fc14cc19))
+* real bas blender ([a7b71b0](https://github.com/MarshallAsch/GasPlanner/commit/a7b71b07ec7c27f055d241659bffed42ad8ba602))
+* upgrade Angular to v21 ([536d6b2](https://github.com/MarshallAsch/GasPlanner/commit/536d6b2d2d1945f6759194f483ae7800080a9b2b))
+* upgrade Angular to v22 ([9392f3a](https://github.com/MarshallAsch/GasPlanner/commit/9392f3a6063a1361bca15197ee1a9b16b1608f40))
+
 # [0.7.0](https://github.com/jirkapok/GasPlanner/compare/v0.6.2...v0.7.0) (2026-09-30)
 
 
