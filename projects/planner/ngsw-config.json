@@ -17,6 +17,16 @@
       }
     },
     {
+      "name": "app-icons",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/icons/*.png"
+        ]
+      }
+    },
+    {
       "name": "markdown-docs",
       "installMode": "prefetch",
       "updateMode": "prefetch",

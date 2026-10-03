@@ -39,7 +39,7 @@ while ((Get-Date) -lt $deadline) {
     try {
         # Use a cache-busting query parameter to avoid CDN/browser caching
         $response = Invoke-RestMethod -Uri "${manifestUrl}?t=$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())" -TimeoutSec 10
-        $deployedVersion = $response.id
+        $deployedVersion = $response.version
 
         if ($deployedVersion -eq $ExpectedVersion) {
             Write-Host "Version $ExpectedVersion is live."

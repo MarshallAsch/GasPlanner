@@ -1,10 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { Location } from '@angular/common';
 import { PreferencesStore } from './preferencesStore';
 import { PlanUrlSerialization } from './PlanUrlSerialization';
 import { SubViewStorage } from './subViewStorage';
 import { ViewStates } from './viewStates';
 import { HelpService } from './learn/help.service';
+
+/** Subset of the browser window used to decide how to offer app installation. */
+export interface InstallPlatform {
+    navigator: {
+        userAgent: string;
+        maxTouchPoints: number;
+        /** Safari only: true when launched from the home screen */
+        standalone?: boolean;
+    };
+    matchMedia(query: string): { matches: boolean };
+}
+
+export const INSTALL_PLATFORM = new InjectionToken<InstallPlatform>('InstallPlatform', {
+    providedIn: 'root',
+    factory: (): InstallPlatform => window
+});
 
 @Injectable()
 export class DashboardStartUp {
@@ -19,7 +35,8 @@ export class DashboardStartUp {
         private urlSerialization: PlanUrlSerialization,
         private viewStore: SubViewStorage,
         private views: ViewStates,
-        private help: HelpService
+        private help: HelpService,
+        @Inject(INSTALL_PLATFORM) private platform: InstallPlatform
     ) {
         this._showDisclaimer = this.preferences.disclaimerEnabled();
         this._showInstallButton = this.preferences.installEnabled();
@@ -30,14 +47,25 @@ export class DashboardStartUp {
     }
 
     public get showInstallButton(): boolean {
-        return this.allowInstall && this._showInstallButton;
+        // iOS Safari never fires beforeinstallprompt, so the Apple hint can't depend on it
+        return this._showInstallButton && (this.allowInstall || this.showAppleInstall);
     }
 
     public get showAppleInstall(): boolean {
-        const userAgent = window.navigator.userAgent.toLowerCase();
-        const isIOs = /iphone|ipad|ipod/.test(userAgent);
-        const isInStandaloneMode = ('standalone' in window.navigator) && (window.navigator.standalone);
-        return isIOs && !isInStandaloneMode;
+        return this.isApple && !this.isStandalone;
+    }
+
+    private get isApple(): boolean {
+        const nav = this.platform.navigator;
+        const isIOs = /iphone|ipad|ipod/i.test(nav.userAgent);
+        // iPadOS 13+ reports itself as desktop Mac, only touch support tells the difference
+        const isIPadOs = /macintosh/i.test(nav.userAgent) && nav.maxTouchPoints > 1;
+        return isIOs || isIPadOs;
+    }
+
+    private get isStandalone(): boolean {
+        return this.platform.navigator.standalone === true ||
+            this.platform.matchMedia('(display-mode: standalone)').matches;
     }
 
     public onDashboard(): void {
