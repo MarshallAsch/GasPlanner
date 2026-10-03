@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {
     DefaultOptions, Diver, OptionDefaults,
     Options, SafetyStop, Salinity, GasToxicity,
-    AirBreakOptions, CircuitType
+    AirBreakOptions, CircuitType, CnsLimits
 } from 'scuba-physics';
 import { StandardGradientsService } from './standard-gradients.service';
 import { UnitConversion } from './UnitConversion';
@@ -17,6 +17,8 @@ export class OptionsService {
     public readonly safetyOffName = 'options.safetyOff';
     public readonly safetyOnName = 'options.safetyOn';
     public readonly safetyAutoName = 'options.safetyAuto';
+    public readonly cnsNoaaName = 'diveOptions.cnsLimitsNoaa';
+    public readonly cnsRevisedName = 'diveOptions.cnsLimitsRevised2025';
     private standardGradients = new StandardGradientsService();
     private options = new Options();
     private _diver: Diver = new Diver();
@@ -122,6 +124,10 @@ export class OptionsService {
             default:
                 return this.safetyAutoName;
         }
+    }
+
+    public get cnsLimitsKey(): string {
+        return this.options.cnsLimits === CnsLimits.revised2025 ? this.cnsRevisedName : this.cnsNoaaName;
     }
 
     public get safetyAutoParams(): Record<string, unknown> {
@@ -279,6 +285,14 @@ export class OptionsService {
 
     public useSafetyOn(): void {
         this.options.safetyStop = SafetyStop.always;
+    }
+
+    public useCnsNoaa(): void {
+        this.options.cnsLimits = CnsLimits.noaa;
+    }
+
+    public useCnsRevised2025(): void {
+        this.options.cnsLimits = CnsLimits.revised2025;
     }
 
     public loadFrom(newOptions: Options, diver: Diver): void {

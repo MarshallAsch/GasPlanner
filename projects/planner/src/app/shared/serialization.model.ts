@@ -1,6 +1,6 @@
 import {
     Tank, Ceiling, EventType,
-    Salinity, SafetyStop, CircuitType,
+    Salinity, SafetyStop, CircuitType, CnsLimits,
     TissueOverPressures
 } from 'scuba-physics';
 import { ViewState } from './views.model';
@@ -246,6 +246,8 @@ export interface OptionsDto {
     problemSolvingDuration: number;
     /** optional because of upgrade */
     airBreaks?: AirBreaksDto;
+    /** optional because of upgrade, missing means NOAA */
+    cnsLimits?: CnsLimits;
     /** optional because of upgrade, missing means open circuit */
     rebreather?: RebreatherDto;
 }

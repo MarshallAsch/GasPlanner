@@ -149,7 +149,7 @@
   "diveOptions": {
     "allUsable": "Tout utilisable", "halfUsable": "Moitié utilisable", "thirdUsable": "Tiers utilisables", "cardTitle": "Options",
     "extendedTrimix": "Étendu (Trimix)", "environmentTab": "Environnement", "conservatismTab": "Conservatisme", "gasesTab": "Gaz",
-    "maxNarcoticDepth": "Profondeur narcotique maximale", "oxygenIsNarcotic": "L'oxygène est narcotique", "airBreaksTab": "Pauses O2",
+    "maxNarcoticDepth": "Profondeur narcotique maximale", "oxygenIsNarcotic": "L'oxygène est narcotique", "cnsLimits": "Limites CNS :", "cnsLimitsNoaa": "NOAA", "cnsLimitsRevised2025": "Révisées 2025 (Hoyt et al.)", "airBreaksTab": "Pauses O2",
     "generateAirBreaks": "Générer les pauses O2", "maxOxygenStopDuration": "Durée maximale du palier à l'oxygène", "backGasDuration": "Durée du gaz de fond",
     "stopsTab": "Paliers", "solveProblem": "Résoudre le problème", "gasSwitch": "Changement de gaz", "lastStopDepth": "Profondeur du dernier palier",
     "decoStopDistance": "Distance entre les paliers de décompression", "roundDecoStops": "Arrondir les paliers de déco aux minutes", "speedsTab": "Vitesses",

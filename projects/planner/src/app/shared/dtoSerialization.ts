@@ -3,7 +3,7 @@ import {
     CalculatedProfile, Diver, Events, Event, Gas,
     HighestDensity, Options, Segment, Tank, Tanks,
     AirBreakOptions, LoadedTissues, CalculatedProfileStatistics, ConsumedGas,
-    RebreatherOptions
+    RebreatherOptions, CnsLimits
 } from 'scuba-physics';
 import {
     AirBreaksDto,
@@ -227,7 +227,8 @@ export class DtoSerialization {
             descentSpeed: options.descentSpeed,
             problemSolvingDuration: options.problemSolvingDuration,
             airBreaks: DtoSerialization.fromAirBreaks(options.airBreaks),
-            rebreather: DtoSerialization.fromRebreather(options.rebreather)
+            rebreather: DtoSerialization.fromRebreather(options.rebreather),
+            cnsLimits: options.cnsLimits
         };
     }
 
@@ -247,6 +248,7 @@ export class DtoSerialization {
         options.ascentSpeed50perc = dto.ascentSpeed50perc;
         options.descentSpeed = dto.descentSpeed;
         options.problemSolvingDuration = dto.problemSolvingDuration;
+        options.cnsLimits = dto.cnsLimits || CnsLimits.noaa;
         DtoSerialization.toAirBreaks(options.airBreaks, dto.airBreaks);
         DtoSerialization.toRebreather(options.rebreather, dto.rebreather);
         return options;

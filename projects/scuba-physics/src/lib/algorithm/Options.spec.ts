@@ -2,6 +2,7 @@ import { Salinity } from '../physics/pressure-converter';
 import { Options, SafetyStop } from './Options';
 import { OpenCircuitBreathing } from '../ccr/BreathingModel';
 import { DepthConverterFactory } from '../physics/depth-converter';
+import { CnsLimits } from '../calculators/cnsCalculator';
 
 export class OptionExtensions {
     public static createOptions(gfLow: number, gfHigh?: number, maxPpO2?: number, maxDecoPpO2?: number, salinity?: Salinity): Options {
@@ -56,6 +57,26 @@ describe('Options', () => {
             const modified = OptionExtensions.createOptions(1,1,1,1,Salinity.fresh);
             modified.loadFrom(sut);
             expect(sut).toEqual(modified);
+        });
+
+        it('applies CNS limits', () => {
+            const source = new Options();
+            source.cnsLimits = CnsLimits.revised2025;
+            const target = new Options();
+            target.loadFrom(source);
+            expect(target.cnsLimits).toEqual(CnsLimits.revised2025);
+        });
+
+        it('keeps NOAA CNS limits when source has none', () => {
+            const source = new Options();
+            delete (source as Partial<Options>).cnsLimits;
+            const target = new Options();
+            target.loadFrom(source);
+            expect(target.cnsLimits).toEqual(CnsLimits.noaa);
+        });
+
+        it('uses NOAA CNS limits by default', () => {
+            expect(new Options().cnsLimits).toEqual(CnsLimits.noaa);
         });
     });
 });

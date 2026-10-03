@@ -18,6 +18,8 @@ In case of any issue with the plan, Notification messages are shown below the di
 | Minimum depth                                                    | Dive executed for long time in shallow depth may lead to saturation diving. Recreational diving no longer applied to that exposures                   | Reduce duration of the dive                                                    |
 | Maximum depth                                                    | The algorithm wasn't tested enough on real life data for depths higher than 120 meters (393 ft). Even it may work, it is not verified.                | Reduce the maximum depth                                                       |
 
+> The CNS limit used by the CNS warning depends on the `CNS limits` dive option: NOAA (default) or the revised 2025 limits (Hoyt et al.), which relax the limit only up to ppO2 1.3 bar. See [Dive options](./plan_options.md#gases) and [Oxygen toxicity](./diveinfo.md#oxygen-toxicity).
+
 > This is the main purpose of this application: to reduce these risks!
 
 Read more about

@@ -277,6 +277,16 @@ export class DiveOptionsComponent extends Streamed implements OnInit {
         this.applyOptions();
     }
 
+    public useCnsNoaa(): void {
+        this.options.useCnsNoaa();
+        this.applyOptions();
+    }
+
+    public useCnsRevised2025(): void {
+        this.options.useCnsRevised2025();
+        this.applyOptions();
+    }
+
     public switchOxygenNarcotic(): void {
         this.options.oxygenNarcotic = !this.options.oxygenNarcotic;
         this.applyOptions();

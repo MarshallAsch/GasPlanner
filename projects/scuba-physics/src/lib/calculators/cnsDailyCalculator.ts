@@ -1,7 +1,7 @@
 import { DepthConverter } from '../physics/depth-converter';
 import { Segment } from '../depths/Segments';
 import { Time } from '../physics/Time';
-import { CnsCalculator } from './cnsCalculator';
+import { CnsCalculator, CnsLimits, RevisedCnsLimits } from './cnsCalculator';
 import { BreathingModel } from '../ccr/BreathingModel';
 
 /** Part of the oxygen exposure history, e.g. one profile segment or surface interval */
@@ -22,7 +22,8 @@ export interface CnsDive {
 }
 
 /**
- * Calculates CNS toxicity accumulated by all dives within last 24 hours against the NOAA 24 hour limits.
+ * Calculates CNS toxicity accumulated by all dives within last 24 hours against the NOAA 24 hour limits
+ * (optionally relaxed by the revised 2025 limits, see CnsLimits).
  * The daily CNS is not eliminated during surface intervals, only exposures older than 24 hours are removed.
  * Reference: NOAA Diving Manual, Oxygen partial pressure and exposure time limits.
  */
@@ -42,8 +43,9 @@ export class CnsDailyCalculator {
 
     private readonly singleExposure: CnsCalculator;
 
-    constructor(private depthConverter: DepthConverter, private readonly breathing: BreathingModel) {
-        this.singleExposure = new CnsCalculator(depthConverter, this.breathing);
+    constructor(private depthConverter: DepthConverter, private readonly breathing: BreathingModel,
+        private cnsLimits: CnsLimits = CnsLimits.noaa) {
+        this.singleExposure = new CnsCalculator(depthConverter, this.breathing, cnsLimits);
     }
 
     /**
@@ -166,7 +168,8 @@ export class CnsDailyCalculator {
             return this.singleExposure.calculateByPpO2(ppO2, duration);
         }
 
-        const limit = Time.toSeconds(CnsDailyCalculator.limitByPpO2(ppO2));
+        const noaaLimit = Time.toSeconds(CnsDailyCalculator.limitByPpO2(ppO2));
+        const limit = RevisedCnsLimits.apply(ppO2, noaaLimit, this.cnsLimits);
         return duration / limit * 100;
     }
 }

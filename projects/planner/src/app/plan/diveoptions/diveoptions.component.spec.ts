@@ -20,6 +20,7 @@ import { MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { OptionsService } from '../../shared/options.service';
 import { provideTestTranslate } from '../../../testing/translate-testing.helpers';
 import { LanguageService } from '../../shared/language.service';
+import { CnsLimits } from 'scuba-physics';
 
 describe('Dive options component', () => {
     let component: DiveOptionsComponent;
@@ -118,6 +119,48 @@ describe('Dive options component', () => {
 
         expect(schedules.selectedOptions.decoStopDistance).toBe(5);
         expect(dispatcherSpy).toHaveBeenCalledWith();
+    });
+
+    describe('CNS limits', () => {
+        it('should call useCnsRevised2025 on selectedOptions and fire recalculate trigger', () => {
+            const dispatcherSpy = spyOn(reloadDispatcher, 'sendOptionsChanged');
+
+            component.useCnsRevised2025();
+
+            expect(schedules.selectedOptions.getOptions().cnsLimits).toEqual(CnsLimits.revised2025);
+            expect(dispatcherSpy).toHaveBeenCalledWith();
+        });
+
+        it('should call useCnsNoaa on selectedOptions and fire recalculate trigger', () => {
+            schedules.selectedOptions.useCnsRevised2025();
+            const dispatcherSpy = spyOn(reloadDispatcher, 'sendOptionsChanged');
+
+            component.useCnsNoaa();
+
+            expect(schedules.selectedOptions.getOptions().cnsLimits).toEqual(CnsLimits.noaa);
+            expect(dispatcherSpy).toHaveBeenCalledWith();
+        });
+
+        it('shows selected CNS limits in complex view', inject([ViewSwitchService], (viewSwitch: ViewSwitchService) => {
+            fixture.destroy();
+            viewSwitch.isComplex = true;
+            schedules.selectedOptions.useCnsRevised2025();
+            const complexFixture = TestBed.createComponent(DiveOptionsComponent);
+            complexFixture.componentInstance.ngOnInit();
+            complexFixture.detectChanges();
+
+            const element = complexFixture.nativeElement as HTMLElement;
+            const input = element.querySelector<HTMLInputElement>('#cnsLimits');
+            expect(input?.value).toEqual('diveOptions.cnsLimitsRevised2025');
+        }));
+
+        it('hides CNS limits in simple view', inject([ViewSwitchService], (viewSwitch: ViewSwitchService) => {
+            viewSwitch.isComplex = false;
+            fixture.detectChanges();
+
+            const element = fixture.nativeElement as HTMLElement;
+            expect(element.querySelector('#cnsLimits')).toBeNull();
+        }));
     });
 });
 

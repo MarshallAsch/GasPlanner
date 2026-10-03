@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Options } from 'scuba-physics';
+import { CnsLimits, Options } from 'scuba-physics';
 import { OptionsService } from './options.service';
 import { UnitConversion } from './UnitConversion';
 import { DiverOptions } from './models';
@@ -134,6 +134,26 @@ describe('Options Service', () => {
     });
 
 
+
+    describe('CNS limits', () => {
+        it('Uses NOAA by default', () => {
+            expect(service.getOptions().cnsLimits).toEqual(CnsLimits.noaa);
+            expect(service.cnsLimitsKey).toEqual(service.cnsNoaaName);
+        });
+
+        it('Use revised 2025 applies to options', () => {
+            service.useCnsRevised2025();
+            expect(service.getOptions().cnsLimits).toEqual(CnsLimits.revised2025);
+            expect(service.cnsLimitsKey).toEqual(service.cnsRevisedName);
+        });
+
+        it('Use NOAA applies to options', () => {
+            service.useCnsRevised2025();
+            service.useCnsNoaa();
+            expect(service.getOptions().cnsLimits).toEqual(CnsLimits.noaa);
+            expect(service.cnsLimitsKey).toEqual(service.cnsNoaaName);
+        });
+    });
 
     describe('Diver', () => {
         it('Max ppO2 updates diver ppO2', () => {

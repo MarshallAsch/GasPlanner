@@ -149,7 +149,7 @@
   "diveOptions": {
     "allUsable": "Vollständig nutzbar", "halfUsable": "Zur Hälfte nutzbar", "thirdUsable": "Zu einem Drittel nutzbar", "cardTitle": "Optionen",
     "extendedTrimix": "Erweitert (Trimix)", "environmentTab": "Umgebung", "conservatismTab": "Konservatismus", "gasesTab": "Gase",
-    "maxNarcoticDepth": "Maximale narkotische Tiefe", "oxygenIsNarcotic": "Sauerstoff wirkt narkotisch", "airBreaksTab": "Luftpausen",
+    "maxNarcoticDepth": "Maximale narkotische Tiefe", "oxygenIsNarcotic": "Sauerstoff wirkt narkotisch", "cnsLimits": "CNS-Grenzwerte:", "cnsLimitsNoaa": "NOAA", "cnsLimitsRevised2025": "Überarbeitet 2025 (Hoyt et al.)", "airBreaksTab": "Luftpausen",
     "generateAirBreaks": "Luftpausen generieren", "maxOxygenStopDuration": "Maximale Dauer des Sauerstoffstopps", "backGasDuration": "Dauer Grundgas",
     "stopsTab": "Stopps", "solveProblem": "Problem lösen", "gasSwitch": "Gaswechsel", "lastStopDepth": "Tiefe des letzten Stopps",
     "decoStopDistance": "Abstand zwischen Dekostopps", "roundDecoStops": "Dekostopps auf Minuten runden", "speedsTab": "Geschwindigkeiten",

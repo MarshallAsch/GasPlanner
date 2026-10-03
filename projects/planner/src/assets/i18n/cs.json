@@ -149,7 +149,7 @@
   "diveOptions": {
     "allUsable": "Celý objem využitelný", "halfUsable": "Polovina objemu využitelná", "thirdUsable": "Třetina objemu využitelná", "cardTitle": "Možnosti",
     "extendedTrimix": "Rozšířený (Trimix)", "environmentTab": "Prostředí", "conservatismTab": "Konzervatismus", "gasesTab": "Plyny",
-    "maxNarcoticDepth": "Maximální narkotická hloubka", "oxygenIsNarcotic": "Kyslík je narkotický", "airBreaksTab": "Vzduchové přestávky",
+    "maxNarcoticDepth": "Maximální narkotická hloubka", "oxygenIsNarcotic": "Kyslík je narkotický", "cnsLimits": "Limity CNS:", "cnsLimitsNoaa": "NOAA", "cnsLimitsRevised2025": "Revidované 2025 (Hoyt a kol.)", "airBreaksTab": "Vzduchové přestávky",
     "generateAirBreaks": "Generovat vzduchové přestávky", "maxOxygenStopDuration": "Maximální doba kyslíkové zastávky", "backGasDuration": "Doba na dnové směsi",
     "stopsTab": "Zastávky", "solveProblem": "Řešit problém", "gasSwitch": "Přepnutí plynu", "lastStopDepth": "Hloubka poslední zastávky",
     "decoStopDistance": "Vzdálenost mezi dekompresními zastávkami", "roundDecoStops": "Zaokrouhlit dekompresní zastávky na minuty", "speedsTab": "Rychlosti",

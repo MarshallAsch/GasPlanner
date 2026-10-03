@@ -5,6 +5,7 @@ import { Salinity } from '../physics/pressure-converter';
 import { SpeedOptions } from '../depths/speeds';
 import { GasMixtures } from '../gases/GasMixtures';
 import { RebreatherOptions } from '../ccr/RebreatherOptions';
+import { CnsLimits } from '../calculators/cnsCalculator';
 
 export enum SafetyStop {
     never = 1,
@@ -41,6 +42,7 @@ export class OptionDefaults {
 
     public static readonly airBreakOxygenDuration = 20;
     public static readonly airBreakBottomGasDuration = 5;
+    public static readonly cnsLimits = CnsLimits.noaa;
 
     public static setMediumConservatism(options: Options): void {
         options.gfLow = OptionDefaults.gfLow;
@@ -146,6 +148,9 @@ export class Options implements GasOptions, DepthOptions, DepthLevelOptions, Spe
      * This time is added to consumption on bottom when calculating rock bottom */
     public problemSolvingDuration = OptionDefaults.problemSolvingDuration;
 
+    /** Source of the CNS oxygen toxicity limits, default NOAA */
+    public cnsLimits = OptionDefaults.cnsLimits;
+
     private readonly _airBreaks = new AirBreakOptions();
     private readonly _rebreather = new RebreatherOptions();
 
@@ -202,6 +207,7 @@ export class Options implements GasOptions, DepthOptions, DepthLevelOptions, Spe
         this.maxPpO2 = other.maxPpO2 || this.maxPpO2;
         this.maxDecoPpO2 = other.maxDecoPpO2 || this.maxDecoPpO2;
         this.oxygenNarcotic = other.oxygenNarcotic;
+        this.cnsLimits = other.cnsLimits || this.cnsLimits;
 
         // environment
         this.salinity = other.salinity || this.salinity;

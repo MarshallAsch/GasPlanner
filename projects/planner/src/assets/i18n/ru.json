@@ -149,7 +149,7 @@
   "diveOptions": {
     "allUsable": "Полностью используемый", "halfUsable": "Наполовину используемый", "thirdUsable": "На треть используемый", "cardTitle": "Параметры",
     "extendedTrimix": "Расширенный (Тримикс)", "environmentTab": "Окружение", "conservatismTab": "Консерватизм", "gasesTab": "Газы",
-    "maxNarcoticDepth": "Максимальная наркотическая глубина", "oxygenIsNarcotic": "Кислород наркотически активен", "airBreaksTab": "Воздушные паузы",
+    "maxNarcoticDepth": "Максимальная наркотическая глубина", "oxygenIsNarcotic": "Кислород наркотически активен", "cnsLimits": "Лимиты ЦНС:", "cnsLimitsNoaa": "NOAA", "cnsLimitsRevised2025": "Пересмотренные 2025 (Hoyt и др.)", "airBreaksTab": "Воздушные паузы",
     "generateAirBreaks": "Генерировать воздушные паузы", "maxOxygenStopDuration": "Максимальная длительность кислородной остановки", "backGasDuration": "Длительность на донном газе",
     "stopsTab": "Остановки", "solveProblem": "Решить проблему", "gasSwitch": "Смена газа", "lastStopDepth": "Глубина последней остановки",
     "decoStopDistance": "Расстояние между декостопами", "roundDecoStops": "Округлять декостопы до минут", "speedsTab": "Скорости",

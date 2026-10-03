@@ -75,6 +75,24 @@
                         <label class="form-check-label" for="roundStops">{{ 'diveOptions.oxygenIsNarcotic' | translate }}</label>
                       </div>
                     </div>
+                    <div class="mb-3 col col-12 col-sm-6">
+                      <label for="cnsLimits" class="form-label" mdbLabel>{{ 'diveOptions.cnsLimits' | translate }}</label>
+                      <div class="input-group dropdown form-outline" mdbDropdown>
+                        <input id="cnsLimits" [value]="options.cnsLimitsKey | translate" class="form-control"
+                          type="text" readonly/>
+                        <button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split"
+                          id="cnsLimitsMenu" aria-expanded="false" data-mdb-toggle="dropdown"
+                          mdbDropdownToggle></button>
+                        <ul class="dropdown-menu dropdown-menu-end" mdbDropdownMenu>
+                          <li (click)="useCnsNoaa()"><a
+                            class="dropdown-item">{{ options.cnsNoaaName | translate }}</a>
+                          </li>
+                          <li (click)="useCnsRevised2025()"><a
+                            class="dropdown-item">{{ options.cnsRevisedName | translate }}</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </mdb-tab>
                 <mdb-tab [title]="'diveOptions.airBreaksTab' | translate">

@@ -49,9 +49,10 @@ export class PlanningTasks {
         const startAscentIndex = parameters.segments.startAscentIndex;
         const originalProfile = DtoSerialization.toSegments(task.calculatedProfile, tanks);
         const otu = new OtuCalculator(depthConverter, breathing).calculateForProfile(originalProfile, startAscentIndex);
-        const cns = new CnsCalculator(depthConverter, breathing)
+        const cnsLimits = parameters.options.cnsLimits;
+        const cns = new CnsCalculator(depthConverter, breathing, cnsLimits)
             .calculateForRepetitiveDive(originalProfile, task.previousCns, task.surfaceInterval, startAscentIndex);
-        const dailyCnsCalculator = new CnsDailyCalculator(depthConverter, breathing);
+        const dailyCnsCalculator = new CnsDailyCalculator(depthConverter, breathing, cnsLimits);
         const diveExposures = dailyCnsCalculator.exposuresForProfile(originalProfile, startAscentIndex);
         const cnsExposures = CnsDailyCalculator.appendDive(task.previousCnsExposures, task.surfaceInterval, diveExposures);
         const density = new DensityAtDepth(depthConverter, breathing).forProfile(originalProfile, startAscentIndex);

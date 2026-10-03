@@ -3,7 +3,7 @@ import {
     OptionsDto, RebreatherDto, SegmentDto, TankDto, DiveDto
 } from './serialization.model';
 import _ from 'lodash';
-import { CircuitType, Precision, SafetyStop, Salinity, Time, Units } from 'scuba-physics';
+import { CircuitType, CnsLimits, Precision, SafetyStop, Salinity, Time, Units } from 'scuba-physics';
 import { RangeConstants, UnitConversion } from './UnitConversion';
 
 export class PlanValidation {
@@ -135,6 +135,7 @@ export class PlanValidation {
         this.isInRange(options.problemSolvingDuration, [1, 100]) &&
         options.safetyStop in SafetyStop &&
         options.salinity in Salinity &&
+        (options.cnsLimits === undefined || options.cnsLimits in CnsLimits) &&
         this.rebreatherValid(options.rebreather);
     }
 

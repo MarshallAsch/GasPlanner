@@ -1,6 +1,6 @@
 import {
     CalculatedProfile, CalculatedProfileStatistics,
-    Event, StandardGases, Time
+    Event, StandardGases, Time, CnsLimits
 } from 'scuba-physics';
 import _ from 'lodash';
 import { PlannerService } from './planner.service';
@@ -110,6 +110,25 @@ describe('PlannerService', () => {
             expect(highestDensity.gas).toEqual(StandardGases.air);
             expect(highestDensity.depth).toEqual(30);
             expect(highestDensity.density).toBeCloseTo(5.094, 3);
+        });
+    });
+
+    describe('CNS limits', () => {
+        // EAN32 at 30 m is ppO2 1.28 bar, where the revised limits are longer than NOAA limits
+        beforeEach(() => {
+            tanksService.tanks[0].tank.o2 = 32;
+        });
+
+        it('Revised 2025 limits lower the CNS and daily CNS', () => {
+            planner.calculate(1);
+            const noaaCns = dive.cns;
+            const noaaDailyCns = dive.dailyCns;
+
+            optionsService.getOptions().cnsLimits = CnsLimits.revised2025;
+            planner.calculate(1);
+
+            expect(dive.cns).toBeLessThan(noaaCns);
+            expect(dive.dailyCns).toBeLessThan(noaaDailyCns);
         });
     });
 

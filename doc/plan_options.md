@@ -12,6 +12,10 @@ For faster customization or to be able reset options to default values, you can 
 * `Maximum narcotic depth` [m]: Limits at which depth gas mixture is considered to be narcotic. Exceeding this depth means the risk of narcosis significantly increases. Default value is 30 meters (100 ft). Increasing this value allows you to use nitrox mixes at higher depths, which is not recommended.
 * `Is oxygen narcotic`: If enabled (default), counts oxygen as narcotic gas; otherwise only nitrogen is considered to be narcotic. Most agencies count both oxygen and nitrogen as narcotic gases. Disabling this option allows you to use gases deeper, but is less safe.
 
+* `CNS limits`: Source of the oxygen exposure time limits used to calculate CNS toxicity and daily CNS (see [Oxygen toxicity](./diveinfo.md#oxygen-toxicity)).
+  * `NOAA` (default): NOAA Diving Manual single exposure and 24 hour limits, e.g. 180 minutes single exposure and 210 minutes per 24 hours at ppO2 1.3 bar.
+  * `Revised 2025 (Hoyt et al.)`: Relaxed limits published by Hoyt et al. 2025 in [Diving and Hyperbaric Medicine 55:228](https://pmc.ncbi.nlm.nih.gov/articles/PMC12500339/) (summary at [The Theoretical Diver](https://thetheoreticaldiver.org/wordpress/index.php/2025/10/08/cns-o2-limit-updates/)). The revised guideline covers only ppO2 1.3 bar: 240 minutes working followed by 240 minutes resting. We use a conservative interpretation: up to ppO2 1.3 bar both the single exposure and the 24 hour limit is the longer of the NOAA limit and 240 minutes. Above 1.3 bar the NOAA limits apply unchanged. This means the limit steps down just above 1.3 bar (e.g. at 1.31 bar the NOAA limit is used again). Exposures at ppO2 0.5 bar or less are still not counted, the 80 % warning level and the 90 minutes CNS surface half time are unchanged.
+
 > How this switches affect gas, see also [Gas properties](./gas_properties.md).
 
 ## Diver

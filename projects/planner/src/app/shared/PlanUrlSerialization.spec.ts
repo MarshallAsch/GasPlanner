@@ -12,7 +12,7 @@ import { ReloadDispatcher } from './reloadDispatcher';
 import { DiveSchedules } from './dive.schedules';
 import { SettingsNormalizationService } from './settings-normalization.service';
 import {
-    AirBreakOptions, CircuitType, Diver,
+    AirBreakOptions, CircuitType, CnsLimits, Diver,
     RebreatherDefaults, RebreatherOptions
 } from 'scuba-physics';
 import { ApplicationSettingsService } from './ApplicationSettings';
@@ -185,7 +185,7 @@ describe('Url Serialization', () => {
 
     describe('Air break options', () => {
         it('Serialize air break options', () => {
-            expect(simpleViewUrl).toContain('o=0,9,3,3,3,18,2,0.85,0.4,3,1.6,30,1.4,10,1,1,0,2,1,0,20,5&');
+            expect(simpleViewUrl).toContain('o=0,9,3,3,3,18,2,0.85,0.4,3,1.6,30,1.4,10,1,1,0,2,1,0,20,5,1&');
         });
 
         it('Deserialize missing Air break options', () => {
@@ -298,6 +298,36 @@ describe('Url Serialization', () => {
             it('Rebreather in simple view', () => {
                 assertSkipped('&r=2,10,1', 'ao=0,0');
             });
+        });
+    });
+
+    describe('CNS limits', () => {
+        const urlWithoutCnsLimits = 't=1-18-0-200-0.209-0&' +
+            'de=0-30-102-1,30-30-618-1&' +
+            'di=24&' +
+            'o=0,9,6,3,3,18,2,0.85,0.4,3,1.6,30,1.4,10,1,1,0,2,1,1,17,3&' +
+            'ao=0,0';
+
+        it('Serialize and deserialize revised CNS limits', () => {
+            complexSut.options.getOptions().cnsLimits = CnsLimits.revised2025;
+            const url = complexSut.urlSerialization.toUrl();
+
+            const current = createSimpleSut();
+            current.urlSerialization.fromUrl(url);
+
+            expect(current.options.getOptions().cnsLimits).toEqual(CnsLimits.revised2025);
+        });
+
+        it('Deserialize missing CNS limits as NOAA', () => {
+            complexSut.options.getOptions().cnsLimits = CnsLimits.revised2025;
+            complexSut.urlSerialization.fromUrl(urlWithoutCnsLimits);
+            expect(complexSut.options.getOptions().cnsLimits).toEqual(CnsLimits.noaa);
+        });
+
+        it('Ignores url with unknown CNS limits', () => {
+            complexSut.urlSerialization.fromUrl(urlWithoutCnsLimits.replace('1,17,3&', '1,17,3,9&'));
+            expect(complexSut.options.getOptions().cnsLimits).toEqual(CnsLimits.noaa);
+            expect(complexSut.options.airBreaks).not.toEqual(new AirBreakOptions(true, 17, 3));
         });
     });
 

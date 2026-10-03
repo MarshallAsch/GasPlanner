@@ -149,7 +149,7 @@
   "diveOptions": {
     "allUsable": "全部可用", "halfUsable": "一半可用", "thirdUsable": "三分之一可用", "cardTitle": "选项",
     "extendedTrimix": "扩展（三元气）", "environmentTab": "环境", "conservatismTab": "保守度", "gasesTab": "气体",
-    "maxNarcoticDepth": "最大氮醉深度", "oxygenIsNarcotic": "氧气具有麻醉性", "airBreaksTab": "纯氧间歇",
+    "maxNarcoticDepth": "最大氮醉深度", "oxygenIsNarcotic": "氧气具有麻醉性", "cnsLimits": "CNS 限值：", "cnsLimitsNoaa": "NOAA", "cnsLimitsRevised2025": "2025 修订版 (Hoyt 等)", "airBreaksTab": "纯氧间歇",
     "generateAirBreaks": "生成纯氧间歇", "maxOxygenStopDuration": "最大纯氧停留时长", "backGasDuration": "水底气体持续时间",
     "stopsTab": "停留点", "solveProblem": "解决问题", "gasSwitch": "气体切换", "lastStopDepth": "最后停留深度",
     "decoStopDistance": "减压停留点间距", "roundDecoStops": "将减压停留点四舍五入到整分钟", "speedsTab": "速度",

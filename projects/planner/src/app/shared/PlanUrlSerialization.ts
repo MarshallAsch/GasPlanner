@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {
     AirBreakOptions, OptionDefaults,
     Diver, Options, SafetyStop, Salinity, Segment,
-    CircuitType, RebreatherDefaults, RebreatherOptions
+    CircuitType, CnsLimits, RebreatherDefaults, RebreatherOptions
 } from 'scuba-physics';
 import { PlanValidation } from './PlanValidation';
 import { Preferences } from './preferences';
@@ -120,7 +120,8 @@ export class PlanUrlSerialization {
             roundStopsToMinutes: context.parseBoolean(16),
             safetyStop: context.parseEnum<SafetyStop>(17),
             salinity: context.parseEnum<Salinity>(18),
-            airBreaks: PlanUrlSerialization.fromAirBreakParam(context)
+            airBreaks: PlanUrlSerialization.fromAirBreakParam(context),
+            cnsLimits: PlanUrlSerialization.fromCnsLimitsParam(context)
         };
         return result;
     }
@@ -136,7 +137,7 @@ export class PlanUrlSerialization {
             `${o.gfHigh},${o.gfLow},${o.lastStopDepth},${o.maxDecoPpO2},${o.maxEND},` +
             `${o.maxPpO2},${o.minimumAutoStopDepth},${oxygenNarcotic},${o.problemSolvingDuration},` +
             `${roundStopsToMinutes},${o.safetyStop},${o.salinity},` +
-            `${airBreaks}`;
+            `${airBreaks},${o.cnsLimits}`;
         return optionsParam;
     }
 
@@ -183,6 +184,15 @@ export class PlanUrlSerialization {
 
     private static toRebreatherParam(rebreather: RebreatherOptions): string {
         return `${rebreather.circuit},${rebreather.injectionRatio},${rebreather.metabolicO2}`;
+    }
+
+    /** Optional trailing value, urls created before the CNS limits option use NOAA */
+    private static fromCnsLimitsParam(context: ParseContext): CnsLimits {
+        if(context.paramValues.length > 22) {
+            return context.parseEnum<CnsLimits>(22);
+        }
+
+        return CnsLimits.noaa;
     }
 
     private static fromDiverParam(parseParam: string): DiverDto {

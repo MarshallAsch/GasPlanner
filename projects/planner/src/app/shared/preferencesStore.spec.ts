@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { PreferencesStore } from './preferencesStore';
 import { PlannerService } from './planner.service';
-import { Options, Tank, Salinity, SafetyStop, AirBreakOptions, CircuitType } from 'scuba-physics';
+import { Options, Tank, Salinity, SafetyStop, AirBreakOptions, CircuitType, CnsLimits } from 'scuba-physics';
 import { AppPreferences } from './serialization.model';
 import { OptionExtensions } from './Options.spec';
 import { WorkersFactoryCommon } from './serial.workers.factory';
@@ -328,5 +328,27 @@ describe('PreferencesStore', () => {
                 const loadedOptions = TestBed.inject(DiveSchedules).dives[0].optionsService;
                 expect(loadedOptions.isRebreather).toBeFalse();
             }));
+
+        it('CNS limits loads saved value', () => {
+            options.getOptions().cnsLimits = CnsLimits.revised2025;
+            sut.save();
+
+            options.getOptions().cnsLimits = CnsLimits.noaa;
+            sut.load();
+
+            expect(options.getOptions().cnsLimits).toEqual(CnsLimits.revised2025);
+        });
+
+        it('CNS limits missing in saved preferences loads as NOAA', () => {
+            sut.save();
+            const saved = JSON.parse(localStorage.getItem('preferences') ?? '{}') as { dives: { options: Record<string, unknown> }[] };
+            delete saved.dives[0].options['cnsLimits'];
+            localStorage.setItem('preferences', JSON.stringify(saved));
+
+            options.getOptions().cnsLimits = CnsLimits.revised2025;
+            sut.load();
+
+            expect(options.getOptions().cnsLimits).toEqual(CnsLimits.noaa);
+        });
     });
 });
